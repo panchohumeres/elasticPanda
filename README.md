@@ -4,9 +4,21 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+#iniciar con este comando
+sudo sysctl -w vm.max_map_count=262144
+
+#matar todos los contenedores
+docker kill $(docker ps -q)
+
+#generar certificados para comunicación interna de -kibana (ejecutar una sóla vez)
+docker-compose -f create-certs.yml run --rm create_certs
+
+docker-compose -f create-certs.yml run --rm create_certs
+
+docker-compose run --rm create_certs
+
+
+TAg=.env docker-compose config
 
 ### How do I get set up? ###
 
