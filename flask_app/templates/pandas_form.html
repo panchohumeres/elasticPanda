@@ -1,0 +1,82 @@
+<!-- sacado de w3schools: https://www.w3schools.com/html/html_forms.asp -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+</style>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>Three Equal Columns</h2>
+
+<form method="POST">
+<div class="row">
+  <div class="column" style="background-color:#aaa;">
+    <h2>Column 1</h2>
+    <p>Some text..</p>
+       <input type="text" name="A">
+  </div>
+  <div class="column" style="background-color:#bbb;">
+    <h2>Column 2</h2>
+    <p>Some text..</p>
+    <input type="text" name="B">
+  </div>
+  <div class="column" style="background-color:#ccc;">
+    <h2>Column 3</h2>
+    <p>Some text..</p>
+    <input type="text" name="C">
+  </div>
+    <div class="column" style="background-color:#ccc;">
+    <h2>Column 3</h2>
+    <p>Some text..</p>
+    <input type="text" name="D">
+
+  </div>
+       <br><br>
+  <input type="submit" name="btn" value="Submit Values">
+</div>
+</form>
+
+<br />
+
+
+
+
+<div class=page>
+<form method="POST">
+	<p>Delete Entries</p>
+    <input type="text" name="del">
+    <input type="submit" name="btn" value="Submit Deletes">
+</form>
+  <h1>Surfer groups</h1>
+  <p>Deletes: {{ dels }}!</p>
+  {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
+  {% endfor %}
+</div>
+
+
+</body>
+</html>
