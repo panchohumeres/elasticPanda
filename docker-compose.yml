@@ -8,6 +8,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
+      - certs:/certs
       - ./flask_app:/code
       - ./data:/data
 

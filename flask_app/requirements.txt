@@ -1,2 +1,4 @@
 flask
 pandas
+numpy
+search
