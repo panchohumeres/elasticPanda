@@ -12,18 +12,6 @@ services:
       - ./flask_app:/code
       - ./data:/data
 
-  jupyter:
-    build:
-      context: ./jupyter
-    ports:
-      - "8888:8888"
-    command: jupyter-notebook --NotebookApp.password=${JUPYTER_PSSWD}
-    volumes:
-      - notebooks:/home/jovyan/work
-      - data:/data
-      - certs:/certs
-      - ./jupyter_config:/home/jovyan/.jupyter/
-
   :
     #container_name: 
     image: docker..co/search/search:7.2.0
