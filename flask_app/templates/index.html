@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title> Find the Best Programming Courses & Tutorials </title>
+    <title> {{tempVars['page_title']}} </title>
     <meta rset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="https://hackr.io/assets/images/code-images/code-favicon-32x32.png" sizes="32x32"><link rel="icon" type="image/png" href="https://hackr.io/assets/images/code-images/code-favicon-16x16.png" sizes="16x16">
+  <!-- <link rel="icon" type="image/png" href="https://hackr.io/assets/images/code-images/code-favicon-32x32.png" sizes="32x32"><link rel="icon" type="image/png" href="https://hackr.io/assets/images/code-images/code-favicon-16x16.png" sizes="16x16"> -->
 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -111,7 +111,7 @@
 
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="/">Hacker.io</a>
+	      <a class="navbar-brand" href="{{tempVars['header_link']}}">{{tempVars['header_link_text']}}</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -121,14 +121,14 @@
 	  </nav>
     <!-- END nav -->
 
-    <div class="hero-wrap js-fullheight" style="background-image: url('static/images/bg_10.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap js-fullheight" data-stellar-background-ratio="0.5" style="background-color:black;">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
           <div class="col-xl-10 ftco-animate mb-5 pb-5" data-scrollax=" properties: { translateY: '70%' }">
-          	<p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We have <span class="number" data-number="1500">0</span> great programming courses scraped from hackr.io!</p>
-            <h1 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find the Best Programming Courses & Tutorials</h1>
-
+          	<p class="mb-4 mt-5 pt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{tempVars['datasets_title1']}} <span class="number" data-number={{count}}></span> {{tempVars['datasets_title2']}}</p>
+            
+            <h1 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> <img src="static/images/nack_logo.png">  {{tempVars['page_title']}} <br/>  {{tempVars['page_sub_title']}} </h1>
 						<div class="ftco-search">
 							<div class="row">
 
@@ -143,7 +143,7 @@
 			              				<div class="form-group">
 				              				<div class="form-field">
 				              					<div class="icon"><span class="icon-search"></span></div>
-								                <input id="user_input"  name="input" type="text" class="form-control" placeholder="Search for the language you want to learn: Python, Javascript,...">
+								                <input id="user_input"  name="input" type="text" class="form-control" placeholder="{{tempVars['search_placeholder']}}">
 								              </div>
 							              </div>
 			              			</div>
@@ -156,9 +156,6 @@
                             </div>
                           </div>
 
-
-
-
 			              		</div>
 			              	</form>
 			              </div>
@@ -167,7 +164,16 @@
 			            </div>
 			          </div>
 			        </div>
-		        </div>
+            </div>
+            
+            <p class="mb-4 mt-5 pt-5"> {{tempVars['description']}} <br>
+              <a href="https://datos.gob.cl"> datos.gob.cl</a> | <a href="https://ckan.org/">CKAN</a> | <a href="https://docs.ckan.org/en/2.8/api/"> CKAN API </a> 
+              <br>
+              <br>
+              <a href="https://portfolio.fhumeres.com"> Francisco Humeres M. </a> (c) 2019-20
+
+            </p>
+
           </div>
         </div>
       </div>
@@ -180,26 +186,38 @@
 				<div class="row">
 
 
-                    {% for hit in res['hits']['hits'] %}
+                    {% for hit in hits %}
                         <div class="col-md-12 ftco-animate">
                             <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
                                   <div class="mb-4 mb-md-0 mr-5">
                                     <div class="job-post-item-header d-flex align-items-center">
-                                      <h2 class="mr-3 text-black h3">{{ hit['_source'][''] }}</h2>
+
+                                      <h2 class="mr-3 text-black h3">{{ hit['title'] }}</h2>
+                                      <p><br></p>
+                                    </div>
+                                    <div>
+                                      <h2 class="mr-3 text-black h3" style="font-size:110%;" >{{tempVars['subtitle_key']}}{{ hit['subtitle'] }}</h2>
+                                    </div>
+                                    <div>
+                                      <p>{{hit['description']}}</p>
+                                    </div>
+
+                                    
                                         <div class="badge-wrap">
-                                          {% for tag in  hit['_source']['tags']  %}
+                                          {% for tag in  hit['tags']  %}
                                             <span class="bg-secondary text-white badge py-2 px-3">{{tag}}</span>
                                           {% endfor %}
                                         </div>
-                                    </div>
+                                    
                                     <div class="job-post-item-body d-block d-md-flex">
-                                      <div class="mr-3"><i class="fa fa-arrow-up" aria-hidden="true"></i> <span>{{ hit['_source']['fe'] }}</span></div>
-                                      <div><span class="icon-layers"></span><a href="/"> {{ hit['_source']['servicio'] }}</a></div>
+                                      <div class="mr-3"><i class="fa fa-arrow-up" aria-hidden="true"></i> <span>{{tempVars['date_key']}} {{ hit['date'] }}</span></div>
+                                      <div><span class="icon-layers"></span><span>{{tempVars['format_key']}} {{ hit['format'] }}</span></div>
                                     </div>
                                   </div>
                                   <div class="ml-auto d-flex">
-                                    <a href="{{ hit['_source']['permalink'] }}" target="_blank" class="btn btn-primary py-2 mr-1">Link Chileatiende</a>
+                                    <a href="{{ hit['url'] }}" target="_blank" class="btn btn-primary py-2 mr-1">Download</a>
                                   </div>
+                                
                             </div>
                         </div><!-- end -->
                     {% endfor %}
@@ -222,7 +240,7 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://github.com/dineshsonalam" target="_blank">Dinesh Sonalam</a>
+  Based on a <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://github.com/dineshsonalam" target="_blank">Dinesh Sonalam project.</a>
   </p>
           </div>
         </div>
@@ -265,7 +283,7 @@
         var settings = {
               "async": true,
               "crossDomain": true,
-              "url": "/autocomplete",
+              "url": "/",
               "method": "POST",
               "headers": {
 
@@ -299,7 +317,7 @@
 
       // drag to tutorial_list division
 
-      if({{ res['hits']['total'] }}>0){
+      if({{ hits|length }}>0){
             $('html, body').animate({
                 scrollTop: $("#tutorial_section").offset().top
             }, 2000);

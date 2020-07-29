@@ -1,0 +1,32 @@
+{"search":{ "index": "ckan",
+       "mapping": {"resource_title":"title", 
+        "formato":"format","fe":"date",
+        "inst.":"subtitle","description":"description",
+        "tags":"tags","url":"url" },
+            "query":{"query": {
+                    "query_string": {
+                        "analyze_wildcard": true,
+                        "query": {{search_term}},
+                        "fields": ["resource_title","description","format","inst."]
+                    }
+                },
+                "size": 50,
+                "sort": [
+
+                ]
+            }
+
+    },
+
+"autocomplete":{ "index":"ckan",
+    "autocomplete" : {"autocomplete":{
+      "text" : {{search_term}},
+      "completion" : {
+        "fields" : ["resource_title","description","format","inst."]
+      }
+    }
+  }
+
+
+}
+}

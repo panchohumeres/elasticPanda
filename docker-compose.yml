@@ -7,10 +7,17 @@ services:
       context: ./flask_app
     ports:
       - "5000:5000"
+    environment:
+      - ELASTIC_USER=$ELASTIC_USER
+      - ELASTIC_PASSWD=$ELASTIC_PASSWORD
+      - ELASTIC_PORT=$ELASTIC_PORT
+      - DOMAIN_ELASTIC=$DOMAIN_ELASTIC
+      - MODE=$MODE  
     volumes:
       - certs:/certs
       - ./flask_app:/code
       - ./data:/data
+      - ./args:/args
 
   :
     #container_name: 

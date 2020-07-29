@@ -6,32 +6,36 @@ from ssl import create_default_context
 from search import Elasticsearch
 from flask import Blueprint,render_template,request,jsonify
 import json
+import sys
 
 app = Flask(__name__)
 
-ES_HOST = "examplePass"
-INDEX_NAME = ''
+
 
 context = create_default_context(cafile="/certs/ca/ca.crt")
-es = Elasticsearch(
-    [ES_HOST],
-    http_auth=('', ''),
-    scheme="https",
-    port=443,
-    ssl_context=context,
-)
+sys.path.append('..')
+from args.templateVars import *
 
-body={
-  "query": {
-    "multi_match" : {
-      "query":      "",
-      "type":       "most_fields",
-      "fields":     [ "", ""]
-    }
-  }
-}
+args={}
+args['_user']=os.environ['ELASTIC_USER']
+args['_psswd']=os.environ['ELASTIC_PASSWD']
+args['DOMAIN_ELASTIC']=os.environ['DOMAIN_ELASTIC']
+args['ELASTIC_PORT']=os.environ['ELASTIC_PORT']
+args['MODE']=os.environ['MODE']
+
+ES_HOST = 'https://'+args['DOMAIN_ELASTIC']
 
 
+if args['MODE']=="internal":
+  es = Elasticsearch(
+      [ES_HOST],
+      http_auth=(''),
+      scheme="https",
+      port=443,
+      ssl_context=context,
+  )
+else:
+  es= Elasticsearch(ES_HOST, http_auth=(args['_user'], args['_psswd']),use_ssl=True, verify_certs=False)
 
 @app.route("/pandas",methods=['GET'])
 def search():
@@ -51,39 +55,47 @@ def search():
     return render_template('view.html',tables=[hits.to_html(classes='female')],
     titles = ['na', ''])
 
-
-
 @app.route("/",methods=['GET','POST'],endpoint='index')
 def index():
     if request.method=='GET':
         res ={
 	            'hits': {'total': 0, 'hits': []}
              }
-        return render_template("index.html",res=res)
+        INDEX_NAME = json.loads(open("/args/ESqueries.json", "r").read().replace("{{search_term}}",'""'))['search']['index']
+        count=es.count(index=INDEX_NAME)['count']
+        return render_template("index.html",res=res,tempVars=template_vars,count=count)
     elif request.method =='POST':
         if request.method == 'POST':
             print("-----------------Calling search Result----------")
             search_term = request.form["input"]
             print("Search Term:", search_term)
-            payload = {
-                "query": {
-                    "query_string": {
-                        "analyze_wildcard": True,
-                        "query": str(search_term),
-                        "fields": ["",""]
-                    }
-                },
-                "size": 50,
-                "sort": [
-
-                ]
-            }
-            payload = json.dumps(payload)
+            payload = open("/args/ESqueries.json", "r").read().replace("{{search_term}}",'"'+search_term+'"')
+            payload = json.dumps(json.loads(payload)["search"]["query"])
+            
+            INDEX_NAME = json.loads(open("/args/ESqueries.json", "r").read().replace("{{search_term}}",'""'))['search']['index']
             #url = "http://search:/hacker/tutorials/_search"
-            response = es.search(index=INDEX_NAME,body=body)
-            #response_dict_data = json.loads(str(response.text))
-            response_dict_data = response
-            return render_template('index.html', res=response_dict_data)
+            res = es.search(index=INDEX_NAME,body=payload)
+            count=es.count(index=INDEX_NAME)['count']
+            
+            mapping=json.loads(open("/args/ESqueries.json", "r").read().replace("{{search_term}}",'""'))['search']['mapping']
+            slc=[k for k,v in mapping.items()]            
+            
+            hits=[]
+
+            for h in res['hits']['hits']:
+              hits.append(h['_source'])
+
+            if len(hits)<1:
+              hits=pd.DataFrame(columns=slc)
+              hits.loc[0]=["No results"]*len(slc)
+            else:
+              hits=pd.DataFrame(hits)
+
+            hits=hits[slc]
+            hits=hits.rename(columns=mapping)
+            hits = hits.to_dict(orient='records')
+            return render_template('index.html', hits=hits,tempVars=template_vars,count=count)
+            
 
 
 @app.route("/autocomplete",methods=['POST'],endpoint='autocomplete')
@@ -92,17 +104,10 @@ def autocomplete():
         search_term = request.form["input"]
         print("POST request called")
         print(search_term)
-        payload ={
-          "autocomplete" : {
-            "text" : str(search_term),
-            "completion" : {
-              "field" : "title_suggest"
-            }
-          }
-        }
-        payload = json.dumps(payload)
-        url="http://search:/autocomplete/_suggest"
-        response = es.search(index=INDEX_NAME,body=body)
+        payload = open("/args/ESqueries.json", "r").read().replace("{{search_term}}",'"'+search_term+'"')
+        payload=json.dumps(json.loads(payload)["autocomplete"]["autocomplete"])
+        INDEX_NAME = json.loads(open("/args/ESqueries.json", "r").read().replace("{{search_term}}",'""'))['autocomplete']['index']
+        response = es.search(index=INDEX_NAME,body=payload)
         #response_dict_data = json.loads(str(response.text))
         response_dict_data = response
         return json.dumps(response_dict_data)
