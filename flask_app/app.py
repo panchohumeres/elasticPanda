@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 
-context = create_default_context(cafile="/certs/ca/ca.crt")
+#context = create_default_context(cafile="/certs/ca/ca.crt")
 sys.path.append('..')
 from args.templateVars import *
 
