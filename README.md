@@ -1,6 +1,6 @@
 # ElasticPanda  <img src="logo.png" alt="alt text" width="302px" height="100px">
+<a href='https://www.freepik.com/vectors/logo' style="font-size:5px">Original logo vector created by sentavio - www.freepik.com</a>
 ## Elasticsearch search engine supercharged with Python Pandas.
-<a href='https://www.freepik.com/vectors/logo'>Original logo vector created by sentavio - www.freepik.com</a>
 Search Engine, based on **Elasticsearch** aided by **Python Pandas** data manipulation package.
 
 ### Components:
