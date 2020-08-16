@@ -483,14 +483,14 @@
 		setDates: function(){
 			var args = $.isArray(arguments[0]) ? arguments[0] : arguments;
 			this.update.apply(this, args);
-			this._trigger('ngeDate');
+			this._trigger('changeDate');
 			this.setValue();
 		},
 
 		setUTCDates: function(){
 			var args = $.isArray(arguments[0]) ? arguments[0] : arguments;
 			this.update.apply(this, $.map(args, this._utc_to_local));
-			this._trigger('ngeDate');
+			this._trigger('changeDate');
 			this.setValue();
 		},
 
@@ -501,11 +501,11 @@
 			var formatted = this.getFormattedDate();
 			if (!this.isInput){
 				if (this.component){
-					this.element.find('input').val(formatted).nge();
+					this.element.find('input').val(formatted).change();
 				}
 			}
 			else {
-				this.element.val(formatted).nge();
+				this.element.val(formatted).change();
 			}
 		},
 
@@ -655,7 +655,7 @@
 			else if (dates.length){
 				// setting date by typing
 				if (String(oldDates) !== String(this.dates))
-					this._trigger('ngeDate');
+					this._trigger('changeDate');
 			}
 			if (!this.dates.length && oldDates.length)
 				this._trigger('clearDate');
@@ -917,13 +917,13 @@
 								switch (this.viewMode){
 									case 0:
 										this.viewDate = this.moveMonth(this.viewDate, dir);
-										this._trigger('ngeMonth', this.viewDate);
+										this._trigger('changeMonth', this.viewDate);
 										break;
 									case 1:
 									case 2:
 										this.viewDate = this.moveYear(this.viewDate, dir);
 										if (this.viewMode === 1)
-											this._trigger('ngeYear', this.viewDate);
+											this._trigger('changeYear', this.viewDate);
 										break;
 								}
 								this.fill();
@@ -943,9 +943,9 @@
 								else if (this.component)
 									element = this.element.find('input');
 								if (element)
-									element.val("").nge();
+									element.val("").change();
 								this.update();
-								this._trigger('ngeDate');
+								this._trigger('changeDate');
 								if (this.o.autoclose)
 									this.hide();
 								break;
@@ -959,7 +959,7 @@
 								month = target.parent().find('span').index(target);
 								year = this.viewDate.getUTCFullYear();
 								this.viewDate.setUTCMonth(month);
-								this._trigger('ngeMonth', this.viewDate);
+								this._trigger('changeMonth', this.viewDate);
 								if (this.o.minViewMode === 1){
 									this._setDate(UTCDate(year, month, day));
 								}
@@ -969,7 +969,7 @@
 								month = 0;
 								year = parseInt(target.text(), 10)||0;
 								this.viewDate.setUTCFullYear(year);
-								this._trigger('ngeYear', this.viewDate);
+								this._trigger('changeYear', this.viewDate);
 								if (this.o.minViewMode === 2){
 									this._setDate(UTCDate(year, month, day));
 								}
@@ -1036,7 +1036,7 @@
 
 			this.fill();
 			this.setValue();
-			this._trigger('ngeDate');
+			this._trigger('changeDate');
 			var element;
 			if (this.isInput){
 				element = this.element;
@@ -1045,7 +1045,7 @@
 				element = this.element.find('input');
 			}
 			if (element){
-				element.nge();
+				element.change();
 			}
 			if (this.o.autoclose && (!which || which === 'date')){
 				this.hide();
@@ -1138,12 +1138,12 @@
 					if (e.ctrlKey){
 						newDate = this.moveYear(this.dates.get(-1) || UTCToday(), dir);
 						newViewDate = this.moveYear(focusDate, dir);
-						this._trigger('ngeYear', this.viewDate);
+						this._trigger('changeYear', this.viewDate);
 					}
 					else if (e.shiftKey){
 						newDate = this.moveMonth(this.dates.get(-1) || UTCToday(), dir);
 						newViewDate = this.moveMonth(focusDate, dir);
-						this._trigger('ngeMonth', this.viewDate);
+						this._trigger('changeMonth', this.viewDate);
 					}
 					else {
 						newDate = new Date(this.dates.get(-1) || UTCToday());
@@ -1166,12 +1166,12 @@
 					if (e.ctrlKey){
 						newDate = this.moveYear(this.dates.get(-1) || UTCToday(), dir);
 						newViewDate = this.moveYear(focusDate, dir);
-						this._trigger('ngeYear', this.viewDate);
+						this._trigger('changeYear', this.viewDate);
 					}
 					else if (e.shiftKey){
 						newDate = this.moveMonth(this.dates.get(-1) || UTCToday(), dir);
 						newViewDate = this.moveMonth(focusDate, dir);
-						this._trigger('ngeMonth', this.viewDate);
+						this._trigger('changeMonth', this.viewDate);
 					}
 					else {
 						newDate = new Date(this.dates.get(-1) || UTCToday());
@@ -1213,7 +1213,7 @@
 			}
 			if (dateChanged){
 				if (this.dates.length)
-					this._trigger('ngeDate');
+					this._trigger('changeDate');
 				else
 					this._trigger('clearDate');
 				var element;
@@ -1224,7 +1224,7 @@
 					element = this.element.find('input');
 				}
 				if (element){
-					element.nge();
+					element.change();
 				}
 			}
 		},
@@ -1251,7 +1251,7 @@
 
 		$(this.inputs)
 			.datepicker(options)
-			.bind('ngeDate', $.proxy(this.dateUpdated, this));
+			.bind('changeDate', $.proxy(this.dateUpdated, this));
 
 		this.pickers = $.map(this.inputs, function(i){
 			return $(i).data('datepicker');
@@ -1275,8 +1275,8 @@
 		},
 		dateUpdated: function(e){
 			// `this.updating` is a workaround for preventing infinite recursion
-			// between `ngeDate` triggering and `setUTCDate` calling.  Until
-			// there is a better menism.
+			// between `changeDate` triggering and `setUTCDate` calling.  Until
+			// there is a better mechanism.
 			if (this.updating)
 				return;
 			this.updating = true;

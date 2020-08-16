@@ -10,7 +10,7 @@
 }
 
 [class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that nge fonts */
+  /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
   font-style: normal;
@@ -417,10 +417,10 @@
 .icon-arrows-h:before {
   content: "\f07e";
 }
-.icon-bar-rt:before {
+.icon-bar-chart:before {
   content: "\f080";
 }
-.icon-bar-rt-o:before {
+.icon-bar-chart-o:before {
   content: "\f080";
 }
 .icon-twitter-square:before {
@@ -579,7 +579,7 @@
 .icon-users:before {
   content: "\f0c0";
 }
-.icon-in:before {
+.icon-chain:before {
   content: "\f0c1";
 }
 .icon-link:before {
@@ -744,7 +744,7 @@
 .icon-lightbulb-o:before {
   content: "\f0eb";
 }
-.icon-exnge:before {
+.icon-exchange:before {
   content: "\f0ec";
 }
 .icon-cloud-download:before {
@@ -918,7 +918,7 @@
 .icon-code-fork:before {
   content: "\f126";
 }
-.icon-in-broken:before {
+.icon-chain-broken:before {
   content: "\f127";
 }
 .icon-unlink:before {
@@ -1248,7 +1248,7 @@
 .icon-pagelines:before {
   content: "\f18c";
 }
-.icon-stack-exnge:before {
+.icon-stack-exchange:before {
   content: "\f18d";
 }
 .icon-arrow-circle-o-right:before {
@@ -1266,7 +1266,7 @@
 .icon-dot-circle-o:before {
   content: "\f192";
 }
-.icon-wheelir:before {
+.icon-wheelchair:before {
   content: "\f193";
 }
 .icon-vimeo-square:before {
@@ -1518,7 +1518,7 @@
 .icon-qq:before {
   content: "\f1d6";
 }
-.icon-wet:before {
+.icon-wechat:before {
   content: "\f1d7";
 }
 .icon-weixin:before {
@@ -1641,13 +1641,13 @@
 .icon-birthday-cake:before {
   content: "\f1fd";
 }
-.icon-area-rt:before {
+.icon-area-chart:before {
   content: "\f1fe";
 }
-.icon-pie-rt:before {
+.icon-pie-chart:before {
   content: "\f200";
 }
-.icon-line-rt:before {
+.icon-line-chart:before {
   content: "\f201";
 }
 .icon-lastfm:before {
@@ -2127,7 +2127,7 @@
 .icon-universal-access:before {
   content: "\f29a";
 }
-.icon-wheelir-alt:before {
+.icon-wheelchair-alt:before {
   content: "\f29b";
 }
 .icon-question-circle-o:before {
@@ -2184,13 +2184,13 @@
 .icon-viadeo-square:before {
   content: "\f2aa";
 }
-.icon-snapt:before {
+.icon-snapchat:before {
   content: "\f2ab";
 }
-.icon-snapt-ghost:before {
+.icon-snapchat-ghost:before {
   content: "\f2ac";
 }
-.icon-snapt-square:before {
+.icon-snapchat-square:before {
   content: "\f2ad";
 }
 .icon-pied-piper:before {
@@ -2598,7 +2598,7 @@
 .icon-battery_alert:before {
   content: "\e19c";
 }
-.icon-battery_rging_full:before {
+.icon-battery_charging_full:before {
   content: "\e1a3";
 }
 .icon-battery_std:before {
@@ -2718,7 +2718,7 @@
 .icon-brush:before {
   content: "\e3ae";
 }
-.icon-bubble_rt:before {
+.icon-bubble_chart:before {
   content: "\e6dd";
 }
 .icon-bug_report:before {
@@ -2814,16 +2814,16 @@
 .icon-center_focus_weak:before {
   content: "\e3b5";
 }
-.icon-nge_history:before {
+.icon-change_history:before {
   content: "\e86b";
 }
-.icon-t:before {
+.icon-chat:before {
   content: "\e0b7";
 }
-.icon-t_bubble:before {
+.icon-chat_bubble:before {
   content: "\e0ca";
 }
-.icon-t_bubble_outline:before {
+.icon-chat_bubble_outline:before {
   content: "\e0cb";
 }
 .icon-check2:before {
@@ -3906,7 +3906,7 @@
 .icon-movie_filter:before {
   content: "\e43a";
 }
-.icon-multiline_rt:before {
+.icon-multiline_chart:before {
   content: "\e6df";
 }
 .icon-music_note:before {
@@ -4134,10 +4134,10 @@
 .icon-picture_in_picture_alt:before {
   content: "\e911";
 }
-.icon-pie_rt:before {
+.icon-pie_chart:before {
   content: "\e6c4";
 }
-.icon-pie_rt_outlined:before {
+.icon-pie_chart_outlined:before {
   content: "\e6c5";
 }
 .icon-pin_drop:before {
@@ -4440,7 +4440,7 @@
 .icon-short_text:before {
   content: "\e261";
 }
-.icon-show_rt:before {
+.icon-show_chart:before {
   content: "\e6e1";
 }
 .icon-shuffle:before {
@@ -4695,7 +4695,7 @@
 .icon-toys:before {
   content: "\e332";
 }
-.icon-track_nges:before {
+.icon-track_changes:before {
   content: "\e8e1";
 }
 .icon-traffic:before {
@@ -4827,7 +4827,7 @@
 .icon-visibility_off:before {
   content: "\e8f5";
 }
-.icon-voice_t:before {
+.icon-voice_chat:before {
   content: "\e62e";
 }
 .icon-voicemail:before {

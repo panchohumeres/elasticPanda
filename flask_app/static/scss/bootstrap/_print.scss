@@ -81,10 +81,10 @@
       page-break-after: avoid;
     }
 
-    // Bootstrap specific nges start
+    // Bootstrap specific changes start
 
     // Specify a size and min-width to make printing closer across browsers.
-    // We don't set margin here use it breaks `size` in Chrome. We also
+    // We don't set margin here because it breaks `size` in Chrome. We also
     // don't use `!important` on `size` as it breaks in Chrome.
     @page {
       size: $print-page-size;
@@ -119,6 +119,6 @@
       }
     }
 
-    // Bootstrap specific nges end
+    // Bootstrap specific changes end
   }
 }
