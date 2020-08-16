@@ -1,6 +1,6 @@
 {"search":{ "index": "ckan",
        "mapping": {"resource_title":"title", 
-        "formato":"format","fe":"date",
+        "formato":"format","fecha":"date",
         "inst.":"subtitle","description":"description",
         "tags":"tags","url":"url" },
             "query":{"query": {

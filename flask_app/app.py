@@ -3,7 +3,7 @@ import os
 import socket
 import pandas as pd
 from ssl import create_default_context
-from search import Elasticsearch
+from elasticsearch import Elasticsearch
 from flask import Blueprint,render_template,request,jsonify
 import json
 import sys
@@ -17,8 +17,8 @@ sys.path.append('..')
 from args.templateVars import *
 
 args={}
-args['_user']=os.environ['ELASTIC_USER']
-args['_psswd']=os.environ['ELASTIC_PASSWD']
+args['elastic_user']=os.environ['ELASTIC_USER']
+args['elastic_psswd']=os.environ['ELASTIC_PASSWD']
 args['DOMAIN_ELASTIC']=os.environ['DOMAIN_ELASTIC']
 args['ELASTIC_PORT']=os.environ['ELASTIC_PORT']
 args['MODE']=os.environ['MODE']
@@ -35,7 +35,7 @@ if args['MODE']=="internal":
       ssl_context=context,
   )
 else:
-  es= Elasticsearch(ES_HOST, http_auth=(args['_user'], args['_psswd']),use_ssl=True, verify_certs=False)
+  es= Elasticsearch(ES_HOST, http_auth=(args['elastic_user'], args['elastic_psswd']),use_ssl=True, verify_certs=False)
 
 @app.route("/pandas",methods=['GET'])
 def search():
@@ -53,7 +53,7 @@ def search():
     #return render_template('view.html',tables=[females.to_html(classes='female'), males.to_html(classes='male')],
     #titles = ['na', 'Female surfers', 'Male surfers'])
     return render_template('view.html',tables=[hits.to_html(classes='female')],
-    titles = ['na', ''])
+    titles = ['na', 'Chile Atiende Browser'])
 
 @app.route("/",methods=['GET','POST'],endpoint='index')
 def index():
@@ -73,7 +73,7 @@ def index():
             payload = json.dumps(json.loads(payload)["search"]["query"])
             
             INDEX_NAME = json.loads(open("/args/ESqueries.json", "r").read().replace("{{search_term}}",'""'))['search']['index']
-            #url = "http://search:/hacker/tutorials/_search"
+            #url = "http://elasticsearch:9200/hacker/tutorials/_search"
             res = es.search(index=INDEX_NAME,body=payload)
             count=es.count(index=INDEX_NAME)['count']
             

@@ -120,18 +120,18 @@
 }
 
 .card-img {
-  width: 100%; // Required use we use flexbox and this inherently applies align-self: stretch
+  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
   @include border-radius($card-inner-border-radius);
 }
 
 // Card image caps
 .card-img-top {
-  width: 100%; // Required use we use flexbox and this inherently applies align-self: stretch
+  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
   @include border-top-radius($card-inner-border-radius);
 }
 
 .card-img-bottom {
-  width: 100%; // Required use we use flexbox and this inherently applies align-self: stretch
+  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
   @include border-bottom-radius($card-inner-border-radius);
 }
 
@@ -266,7 +266,7 @@
 
     .card {
       display: inline-block; // Don't let them vertically span multiple columns
-      width: 100%; // Don't let their width nge
+      width: 100%; // Don't let their width change
     }
   }
 }

@@ -22,9 +22,9 @@
   min-width: $dropdown-min-width;
   padding: $dropdown-padding-y 0;
   margin: $dropdown-spacer 0 0; // override default ul
-  font-size: $font-size-base; // Redeclare use nesting can cause inheritance issues
+  font-size: $font-size-base; // Redeclare because nesting can cause inheritance issues
   color: $body-color;
-  text-align: left; // Ensures proper alignment if parent has it nged (e.g., modal footer)
+  text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
   list-style: none;
   background-color: $dropdown-bg;
   background-clip: padding-box;

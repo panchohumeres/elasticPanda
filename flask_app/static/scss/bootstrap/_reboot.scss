@@ -13,7 +13,7 @@
 // 1. Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
 // 2. Change the default font family in all browsers.
 // 3. Correct the line height in all browsers.
-// 4. Prevent adjustments of font size after orientation nges in IE on Windows Phone and in iOS.
+// 4. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
 // 5. Setting @viewport causes scrollbars to overlap content in IE11 and Edge, so
 //    we force a non-overlapping, non-auto-hiding scrollbar to counteract.
 // 6. Change the default tap highlight to be completely transparent in iOS.
@@ -115,7 +115,7 @@ p {
 //
 // 1. Remove the bottom border in Firefox 39-.
 // 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
-// 3. Add explicit cursor to indicate nged behavior.
+// 3. Add explicit cursor to indicate changed behavior.
 // 4. Duplicate behavior to the data-* attribute for our tooltip plugin
 
 abbr[title],

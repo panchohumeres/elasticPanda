@@ -7,7 +7,7 @@
   flex-direction: column;
 
   // No need to set list-style: none; since .list-group-item is block level
-  padding-left: 0; // reset padding use ul and ol
+  padding-left: 0; // reset padding because ul and ol
   margin-bottom: 0;
 }
 
@@ -107,7 +107,7 @@
 
 // Contextual variants
 //
-// Add modifier classes to nge text and background color on individual items.
+// Add modifier classes to change text and background color on individual items.
 // Organizationally, this must come after the `:hover` states.
 
 @each $color, $value in $theme-colors {

@@ -4,11 +4,11 @@
 // which defaults to the `$input-focus-border-color` variable.
 //
 // We highly encourage you to not customize the default value, but instead use
-// this to tweak colors on an as-needed basis. This aesthetic nge is based on
+// this to tweak colors on an as-needed basis. This aesthetic change is based on
 // WebKit's default styles, but applicable to a wider range of browsers. Its
-// usability and accessibility should be taken into account with any nge.
+// usability and accessibility should be taken into account with any change.
 //
-// Example usage: nge the default blue border and shadow to white for better
+// Example usage: change the default blue border and shadow to white for better
 // contrast against a dark gray background.
 @mixin form-control-focus() {
   &:focus {

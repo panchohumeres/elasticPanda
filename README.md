@@ -1,10 +1,10 @@
 # ElasticPanda  <img src="logo.png" alt="alt text" width="302px" height="100px">
-## Elasticsearch search engine superrged with Python Pandas.
+## Elasticsearch search engine supercharged with Python Pandas.
 <a href='https://www.freepik.com/vectors/logo'>Original logo vector created by sentavio - www.freepik.com</a>
 Search Engine, based on **Elasticsearch** aided by **Python Pandas** data manipulation package.
 
 ### Components:
- - **Elasticsearch**: Two-node Elasticsearch 7.2 Cluster, with native [REST API](https://www..co/guide/en/search/reference/current/rest-apis.html) available in its endpoint.
+ - **Elasticsearch**: Two-node Elasticsearch 7.2 Cluster, with native [REST API](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html) available in its endpoint.
  - **Nginx:** Nginx service built from [Nginx official Docker image](https://hub.docker.com/_/nginx). Used for enabling **https** on Kibana and Jupyter endpoints, and Elasticsearch REST API.
  - **Certbot:** Custom docker container for configuration of **https** SSL certificates, and automating its renewal. Based on [nginx-certbot project](https://github.com/wmnnd/nginx-certbot)
 - **Flask:** Flask container, with **Pandas** library installed [nginx-certbot project](https://github.com/wmnnd/nginx-certbot)
@@ -13,11 +13,11 @@ Search Engine, based on **Elasticsearch** aided by **Python Pandas** data manipu
  - Docker and Docker-compose.
  - node.js
  - npm
- -  dump [see install instructions](https://www.npmjs.com/package/dump) 
+ - elastic dump [see install instructions](https://www.npmjs.com/package/elasticdump) 
 
 ## Setup 
  1. Create `.env` file and populate environment variables.Follow structure outlined in the [example .env file](example.env)
- 2. `./bi-init.sh`--->Create the folders and nge permissions necessary for **SuperJupyter** startup.
+ 2. `./bi-init.sh`--->Create the folders and change permissions necessary for **SuperJupyter** startup.
  3. Register 2 domains, for the Jupyter and Superset endpoints,all pointing to your **server/VM IP**.
  4. Change accordingly the environment variables on the `.env` file.
  5. `./certbot.sh`--->Create the SSL certificates and keystores for enabling **https** on the Kibana and Jupyter endpoints, and the Elasticsearch REST API.
@@ -31,7 +31,7 @@ Search Engine, based on **Elasticsearch** aided by **Python Pandas** data manipu
 ## Startup
  1. `docker-compose up`--->Start the stack
  2. `docker-compose up docker-compose_local.yaml`---->Start the stack in local mode (without nginx nor certbot, for testing in local environment).
- 3. `docker-compose up --build`--->Start the stack recreating the services after nges in environment variables.
+ 3. `docker-compose up --build`--->Start the stack recreating the services after changes in environment variables.
 
 ## File Structure
 
