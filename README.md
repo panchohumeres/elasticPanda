@@ -7,7 +7,7 @@ Search Engine, based on **Elasticsearch** aided by **Python Pandas** data manipu
  - **Elasticsearch**: Two-node Elasticsearch 7.2 Cluster, with native [REST API](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html) available in its endpoint.
  - **Nginx:** Nginx service built from [Nginx official Docker image](https://hub.docker.com/_/nginx). Used for enabling **https** on Kibana and Jupyter endpoints, and Elasticsearch REST API.
  - **Certbot:** Custom docker container for configuration of **https** SSL certificates, and automating its renewal. Based on [nginx-certbot project](https://github.com/wmnnd/nginx-certbot)
-- **Flask:** Flask container, with **Pandas** library installed [nginx-certbot project](https://github.com/wmnnd/nginx-certbot)
+- **Flask:** Flask container, with **Pandas** library installed, based on (c) 2019 Dinesh Sonachalam [Elasticsearch-Flask Tutorial](https://github.com/dineshsonachalam/Building-a-search-engine-using-Elasticsearch)
 
 ### Dependencies
  - Docker and Docker-compose.
