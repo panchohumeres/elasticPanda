@@ -16,7 +16,7 @@ sudo chown -R ${UID} ${CERTBOT_PATH}
 
 #CREATE CERTIFICATES FOR INTERNAL ELASTICSEARCH-KIBANA COMMUNICATION (TSL LAYER)
 echo "creating certificates for TSL internal layer of stack"
-docker-compose -f ./certs/create-certs.yml run --rm create_certs
+docker-compose -f create-certs.yml run --rm create_certs
 
 echo "changing ownership of certificates files (for docker execution)"
 sudo chmod -R g+rwx ${HOST_DATA_PATH}
