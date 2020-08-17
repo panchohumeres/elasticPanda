@@ -5,7 +5,7 @@ set -eu
 #IP LOCALHOST
 export LOCALHOST=$(ip route | awk '/^default via /{print $3}')
 
-envsubst '${SEARCH_DOMAIN} ${SEARCH_PORT} ${SEARCH_SERVER_NAME}' < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.conf
+envsubst '${LOCALHOST} ${SEARCH_DOMAIN} ${SEARCH_PORT} ${SEARCH_SERVER_NAME}' < /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.conf
 #echo "$@"
 
 exec "$@"
