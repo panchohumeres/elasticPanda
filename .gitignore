@@ -13,3 +13,4 @@ nginx-config/test
 ebak.env
 CRONTAB/logs/**
 passwords.txt
+args/__pycache__*
