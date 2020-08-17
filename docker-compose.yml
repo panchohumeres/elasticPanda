@@ -6,7 +6,7 @@ services:
     build:
       context: ./flask_app
     ports:
-      - "5000:5000"
+      - ${SEARCH_PORT}:5000
     environment:
       - ELASTIC_USER=$ELASTIC_USER
       - ELASTIC_PASSWD=$ELASTIC_PASSWORD
@@ -41,7 +41,7 @@ services:
       - xpack.security.authc.anonymous.roles=dashboard_only_custom
       - xpack.security.authc.anonymous.authz_exception=true
 
-    volumes: ['data01:/usr/share/elasticsearch/data', 'certs:$CERTS_DIR']
+    volumes: ['${HOST_DATA_PATH}/data01:/usr/share/elasticsearch/data','certs:$CERTS_DIR']
     ports:
       - 9200:9200
     healthcheck:
@@ -69,11 +69,17 @@ services:
       - xpack.security.transport.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
       - xpack.security.transport.ssl.certificate=$CERTS_DIR/es02/es02.crt
       - xpack.security.transport.ssl.key=$CERTS_DIR/es02/es02.key
-    volumes: ['data02:/usr/share/elasticsearch/data', 'certs:$CERTS_DIR']
+    volumes: ['${HOST_DATA_PATH}/data01:/usr/share/elasticsearch/data','certs:$CERTS_DIR']
 
   wait_until_ready:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
     command: /usr/bin/true
     depends_on: ["es01"]
 
-volumes: {"data01", "data02","data", "certs","notebooks"}
+volumes:
+  certs:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/${HOST_DATA_PATH}/certs
+      o: bind

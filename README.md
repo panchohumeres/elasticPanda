@@ -36,7 +36,7 @@ Relevant File structure
 ```
 📦EJK
 ┣ 📂args
-┃ Folder for python arguments (for being used by Jupyter Notebook container)
+┃ Folder for python arguments, including elasticsearch queries.
 ┣ 📂flask_app
 ┃ Flask container configuration files, including Dockerfile, app script and templates.
 ┣ 📂modules
