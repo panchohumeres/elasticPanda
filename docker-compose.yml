@@ -76,6 +76,24 @@ services:
     restart: unless-stopped
     volumes: ['${HOST_DATA_PATH}/certbot/conf:/etc/letsencrypt','${HOST_DATA_PATH}/certbot/www:/var/www/certbot']
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  
+    nginx:
+    build:
+      context: ./nginx
+    environment:
+      - LISTEN_PORT=80
+      - DOMAIN_ELASTIC=$DOMAIN_ELASTIC
+      - SEARCH_DOMAIN=$SEARCH_DOMAIN
+      - SEARCH_PORT=${SEARCH_PORT}
+      - SEARCH_SERVER_NAME=$SEARCH_SERVER_NAME
+    volumes: ['${PWD}/nginx/conf:/etc/nginx/conf.d','${PWD}/nginx/sites-enabled:/etc/nginx/sites-enabled',
+    '${HOST_DATA_PATH}/certbot/conf:/etc/letsencrypt','${HOST_DATA_PATH}/certbot/www:/var/www/certbot',
+    ]
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
   wait_until_ready:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
