@@ -11,17 +11,18 @@ Search Engine, based on **Elasticsearch** aided by **Python Pandas** data manipu
 
 ### Dependencies
  - Docker and Docker-compose.
- - node.js
- - npm
- - elastic dump [see install instructions](https://www.npmjs.com/package/elasticdump) 
+ - node.js (Only for elastic dump, optional)
+ - npm (Only for elastic dump, optional)
+ - elastic dump (optional, only for backup of ES indices data) [see install instructions](https://www.npmjs.com/package/elasticdump) 
 
 ## Setup 
  1. Create `.env` file and populate environment variables.Follow structure outlined in the [example .env file](example.env)
  2. `./app-init.sh`--->Create the folders and change permissions necessary for **ElasticPanda** startup.
+  2.1. If you want to execute only with some components, and Elasticsearch will **NOT** be hosted in this VM, execute the script with addiontal parameters indicating the services that will be hosted in this machine. For example: `./app-init.sh -search -nginx`.
  3. Register 2 domains, for the Flask App and Elasticsearch endpoints,all pointing to your **server/VM IP**.
  4. Change accordingly the environment variables on the `.env` file.
  5. `./certbot.sh`--->Create the SSL certificates and keystores for enabling **https** on the Flask app endpoint and the Elasticsearch REST API.
- 6. `docker-compose up search`--->Start only the Flask App (used for when connecting to an external Elasticsearch URL for example)
+ 5.1. `docker-compose up search`--->Start only the Flask App (used for when connecting to an external Elasticsearch URL for example)
 
 
 ## Startup
@@ -57,4 +58,7 @@ Relevant File structure
 ┣ 📜.env
 ┃    .env file for docker-compose file.
 ```
-## TROUBLESHOOTING:
+## TESTING AND DEBUGGING:
+You can execute a test of a single search workflow through a python script:
+1. `docker-compose exec search bash`--->get into flask's app container shell
+2. `-python -i search_test.py`- will execute the script and leave you in the interactive shell
